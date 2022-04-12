@@ -1,17 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="d-flex">
+      <!-- section -->
+      <task-section :newId="newId"></task-section>
+      <!-- add section button -->
+      <div>
+        <button @click="createSection()" type="button" class="btn btn-light shadow">ADD SECTION</button>
+      </div>
+    </div>
+    
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TaskSection from './components/TaskSection.vue'
+// import TaskSection from './components/TaskSection.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    TaskSection,
+  },
+  data() {
+    return {
+      newId: 0,
+    }
+  },
+  methods: {
+    createSection: function(){
+      this.newId += 1;
+    }
   }
 }
 </script>
@@ -24,5 +42,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.card {
+  width: 300px;
+}
+button {
+  background-color: transparent;
+  border: transparent;
 }
 </style>
