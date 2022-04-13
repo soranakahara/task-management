@@ -1,7 +1,7 @@
 <template>
     <div class="card p-4 shadow mx-3">
         <div class="input-group mb-3 shadow-sm">
-          <input type="text" class="form-control" v-model="sectionName" v-on:change="changed()" placeholder="Section Name">
+          <input type="text" class="form-control" v-model="sectionName" v-on:input="changed()" placeholder="Section Name">
         </div>
         <!-- task -->
         <div v-for="(mytask, index) in taskList" :key="index">
@@ -20,7 +20,7 @@ export default ({
     name: "TaskSection",
     data() {
         return {
-            sectionName: "",
+            sectionName: this.section.sectionName,
             taskList: [],
             newTaskId: 0,
             
@@ -29,7 +29,7 @@ export default ({
     components: {
         MyTask,
     },
-    props: ['newId'], // sectionを新規作成するときのId
+    props: ['section'], // sectionオブジェクト
     created: function(){
         this.createTask();
     },
@@ -38,7 +38,7 @@ export default ({
             // console.log("cerateTask"+this.sectionName);
             const newTask = {
                 id: this.newTaskId,
-                sectionId: this.newId,
+                sectionId: this.section.id,
                 sectionName: this.sectionName,
                 title: "",
                 description: "",

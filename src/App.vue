@@ -2,7 +2,9 @@
   <div id="app">
     <div class="d-flex">
       <!-- section -->
-      <task-section :newId="newId"></task-section>
+      <div v-for="(section, index) in sectionList" v-bind:key="index">
+        <task-section :newId="newId" v-bind:section="section"></task-section>
+      </div>
       <!-- add section button -->
       <div>
         <button @click="createSection()" type="button" class="btn btn-light shadow">ADD SECTION</button>
@@ -14,7 +16,6 @@
 
 <script>
 import TaskSection from './components/TaskSection.vue'
-// import TaskSection from './components/TaskSection.vue'
 
 export default {
   name: 'App',
@@ -23,11 +24,17 @@ export default {
   },
   data() {
     return {
+      sectionList: [],
       newId: 0,
     }
   },
   methods: {
     createSection: function(){
+      const newSection = {
+        id: this.newId,
+        sectionName: "",
+      }
+      this.sectionList.push(newSection);
       this.newId += 1;
     }
   }
